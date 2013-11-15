@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Live";
+    
+    //http://aw2302.myfoscam.org
+}
+
+<section>
+    <h2>Live View</h2>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="thumbnail">
+                <img id="video1" src="http://96.38.33.82:20722/videofeed" >
+                <h3>Children's Wing</h3>
+                <p>Camera is located in the bonus room and looking South</p>
+                <p><a class="btn btn-default btn-primary" href="http://96.38.33.82:20722/photo.jpg" download="Webcam1-@((DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss"))).jpg">Take Snapshot</a></p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="thumbnail">
+                <img id="video2" src="http://96.38.33.82:8081/videostream.cgi?user=viewer&pwd=viewer" >
+                <h3>Lobby & Auditorium</h3>
+                <p>Camera is located on the South corner of the Farmhouse looking North</p>
+                <p><a class="btn btn-primary" href="http://96.38.33.82:8081/snapshot.jpg?user=viewer&pwd=viewer" download="Webcam2-@((DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss"))).jpg">Take Snapshot</a></p>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <span style="display: block !important; width: 320px; text-align: center; font-family: sans-serif; font-size: 12px;">
+                <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:37174.1.99999&bannertypeclick=wu_clean2day" title="Spring Hill, Tennessee Weather Forecast" target="_blank">
+                    <img id="weatherImage" src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&airportcode=KMRC&ForcedCity=Spring Hill&ForcedState=TN&zip=37174&language=EN" alt="Find more about Weather in Spring Hill, TN" width="300" />
+                </a>
+                <br>
+                <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:37174.1.99999&bannertypeclick=wu_clean2day" title="Get latest Weather Forecast updates" target="_blank">Click for weather forecast</a>
+            </span>
+        </div>
+    </div>        
+</section>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            UpdateWeather();
+        });
+        
+        function UpdateWeather() {
+            $("#weatherImage").attr('src', function(i, old) {
+                return "http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&airportcode=KMRC&ForcedCity=Spring Hill&ForcedState=TN&zip=37174&language=EN" + "&rand=" + new Date().getTime();
+            });
+            setTimeout(UpdateWeather, 300000);
+        }
+</script>
+}
+
